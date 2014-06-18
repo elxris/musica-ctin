@@ -3,7 +3,7 @@ var http  = require('http'),
     fs    = require('fs'),
     jade  = require('jade'),
     less  = require('less'),
-    parser= new(less.Parser)({paths: ['./less', './less/bootstrap']}),
+    parser= new(less.Parser)({paths: ['./less', './less/bootstrap', './less/fontawesome']}),
     xprss = require('express'),
     app   = xprss(),
     server = http.Server(app),
@@ -44,14 +44,6 @@ var renderHTML = function(archivo, callback) {
 }
 var renderJS = function(archivo, callback) {
   if (!viewsCache.jade[archivo]) {
-    fs.readFile('./js/'+archivo+'.js', {encoding: 'UTF-8', flag: 'r'}, function(err, data){
-      if (err) {
-        callback(err, null);
-        return;
-      }
-      viewsCache.jade[archivo] = data;
-      callback(null, viewsCache.jade[archivo]);
-    });
   } else {
     callback(null, viewsCache.jade[archivo]);
   }
@@ -84,16 +76,15 @@ mongoclient.open(function (e, client) {
       }
     });
   });
-  app.get('/static/js/:archivo.js', function(req, res, next){
-    renderJS(req.params.archivo, function(err, css){
-      if (!err) {
-        res.set('Content-Type', 'text/css')
-        res.send(200, css);
-      }else{
-        console.error(err);
+
+  app.get(/^\/static\/(\w+)\/((\w|\-|\.)+)(?:.+)?$/, function(req, res, next){
+    console.log('./static/'+req.params[0]+'/'+req.params[1]);
+    fs.readFile('./static/'+req.params[0]+'/'+req.params[1], {flag: 'r'}, function(err, data){
+      if (err) {
         next();
         return;
       }
+      res.send(200, data);
     });
   });
   app.get('*', function(req, res){

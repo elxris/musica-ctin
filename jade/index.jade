@@ -8,18 +8,18 @@ body
       a.user Cool Kid
       .video
       .rate
-        .rate-up    @
-        .rate-down  @
-        .rate-share @
+        button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+        button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
+        button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
     .next A Continuación:
       a.titulo Canción Más Chula
       .by por
       a.user Cool Kid
       .video
       .rate
-        .rate-up    @
-        .rate-down  @
-        .rate-share @
+        button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+        button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
+        button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
     .votos-random ¡Vota o muere!
       .lista-canciones
         - for (i = 1; i <= 10; i++)
@@ -28,7 +28,7 @@ body
             .by por
             a.user(href="#") Cool Kid
             .rate
-                .rate-up   @
-                .rate-down  @
-                .rate-share @
+                button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+                button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
+                button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
         include ./foot
