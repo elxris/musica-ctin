@@ -1,5 +1,34 @@
 include ./header
 body
   .container
-    .row: .col-md-12
+    .add-music
+    .now-playing
+      a.titulo Canción Chula
+      .by por
+      a.user Cool Kid
+      .video
+      .rate
+        .rate-up    @
+        .rate-down  @
+        .rate-share @
+    .next A Continuación:
+      a.titulo Canción Más Chula
+      .by por
+      a.user Cool Kid
+      .video
+      .rate
+        .rate-up    @
+        .rate-down  @
+        .rate-share @
+    .votos-random ¡Vota o muere!
+      .lista-canciones
+        - for (i = 1; i <= 10; i++)
+          .video-item
+            a.titulo Canción ##{i}
+            .by por
+            a.user(href="#") Cool Kid
+            .rate
+                .rate-up   @
+                .rate-down  @
+                .rate-share @
         include ./foot
