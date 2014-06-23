@@ -42,20 +42,23 @@ var renderHTML = function(archivo, callback) {
     callback(null, viewsCache.jade[archivo]);
   }
 }
-var renderJS = function(archivo, callback) {
-  if (!viewsCache.jade[archivo]) {
-  } else {
-    callback(null, viewsCache.jade[archivo]);
-  }
-}
 
 var MongoClient = require('mongodb').MongoClient;
 var MongoServer = require('mongodb').Server;
 var mongoclient = new MongoClient(new MongoServer('localhost', 27017));
 mongoclient.open(function (e, client) {
   var db = client.db('youtube');
+  app.get('/add', function(req, res, next){
+    db.collection('musica', function(err, col){
+      col.insert({
+        "video-id": req.param("video-id"),
+        "th-url": req.param("th-url"),
+        "time": new Date.now()});
+    })
+  });
   app.get('/:view', function(req, res, next){
     renderHTML(req.params.view, function(err, fn){
+      console.log(Date.now());
       if (err) {
         console.error(err);
         next();
@@ -78,6 +81,7 @@ mongoclient.open(function (e, client) {
   });
 
   app.get(/^\/static\/(\w+)\/((\w|\-|\.)+)(?:.+)?$/, function(req, res, next){
+    // 0 folder, 1 nombre
     console.log('./static/'+req.params[0]+'/'+req.params[1]);
     fs.readFile('./static/'+req.params[0]+'/'+req.params[1], {flag: 'r'}, function(err, data){
       if (err) {

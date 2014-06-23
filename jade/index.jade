@@ -1,25 +1,30 @@
 include ./header
 body
-  .container
+  .container: .row: .col-md-12
     .add-music
+      form(id="url", method="POST", action="")
+        input(type="text", placeholder="youtube video id")
+        button(type="submit", value="YA!")
     .now-playing
       a.titulo Canción Chula
       .by por
       a.user Cool Kid
       .video
+        #player
+        //- iframe#ytplayer(type="text/html", width="640", height="360", src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&enablejsapi=1&rel=0&theme=light", frameborder="0", allowfullscreen)
       .rate
-        button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+        button.btn.btn-success.rate-up(type="button"):    i.fa.fa-thumbs-up
         button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
-        button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
+        button.btn.btn-primary.rate-share(type="button"): i.fa.fa-share-alt
     .next A Continuación:
       a.titulo Canción Más Chula
       .by por
       a.user Cool Kid
       .video
       .rate
-        button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+        button.btn.btn-success.rate-up(type="button"):    i.fa.fa-thumbs-up
         button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
-        button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
+        button.btn.btn-primary.rate-share(type="button"): i.fa.fa-share-alt
     .votos-random ¡Vota o muere!
       .lista-canciones
         - for (i = 1; i <= 10; i++)
@@ -28,7 +33,7 @@ body
             .by por
             a.user(href="#") Cool Kid
             .rate
-                button.btn.btn-success.rate-up(type="button"):     i.fa.fa-thumbs-up
+                button.btn.btn-success.rate-up(type="button"):    i.fa.fa-thumbs-up
                 button.btn.btn-danger.rate-down(type="button"):   i.fa.fa-thumbs-down
-                button.btn.btn-primary.rate-share(type="button"):  i.fa.fa-share-alt
+                button.btn.btn-primary.rate-share(type="button"): i.fa.fa-share-alt
         include ./foot
